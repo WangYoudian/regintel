@@ -1,0 +1,72 @@
+/* RegIntel AI — v1 Custom Styles */
+
+.stApp {
+    background-color: #f8f9fa;
+}
+
+.main-header {
+    color: #1a237e;
+    font-weight: 600;
+    margin-bottom: 0.5rem;
+}
+
+.kpi-card {
+    background: white;
+    border-radius: 8px;
+    padding: 1.2rem;
+    box-shadow: 0 1px 4px rgba(0,0,0,0.08);
+    text-align: center;
+    border-left: 4px solid #1a237e;
+}
+
+.kpi-card .kpi-value {
+    font-size: 2rem;
+    font-weight: 700;
+    line-height: 1.2;
+}
+
+.kpi-card .kpi-label {
+    font-size: 0.8rem;
+    color: #666;
+    margin-top: 0.3rem;
+}
+
+.status-covered {
+    color: #2e7d32;
+    font-weight: 600;
+}
+
+.status-partial {
+    color: #e65100;
+    font-weight: 600;
+}
+
+.status-missing {
+    color: #c62828;
+    font-weight: 600;
+}
+
+.obligation-card {
+    background: white;
+    border-radius: 6px;
+    padding: 1rem;
+    margin-bottom: 0.5rem;
+    border-left: 3px solid #1a237e;
+    box-shadow: 0 1px 3px rgba(0,0,0,0.06);
+}
+
+.gap-card {
+    background: #fff8e1;
+    border-radius: 6px;
+    padding: 1rem;
+    margin-bottom: 0.5rem;
+    border-left: 3px solid #e65100;
+}
+
+.rec-card {
+    background: #e8f5e9;
+    border-radius: 6px;
+    padding: 1rem;
+    margin-bottom: 0.5rem;
+    border-left: 3px solid #2e7d32;
+}
