@@ -1,6 +1,7 @@
 __pycache__/
 *.pyc
 .venv/
+sessions/
 data/uploads/
 .env
 .uv/
