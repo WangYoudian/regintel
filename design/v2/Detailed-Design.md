@@ -434,7 +434,7 @@ classDiagram
         +get_analysis_history(conn, limit) list~dict~
         +find_similar_controls(conn, embedding, threshold, top_k) list~dict~
         +delete_analysis(conn, run_id)
-    end
+    }
 
     ConnectionPool <.. AnalysisRepository : uses
 ```
@@ -450,18 +450,18 @@ classDiagram
 
     class AnalysisRouter {
         +GET /api/analyses
-        +GET /api/analyses/{id}
-        +DELETE /api/analyses/{id}
+        +GET "/api/analyses/:id"
+        +DELETE "/api/analyses/:id"
     }
 
     class ReportRouter {
-        +GET /api/analyses/{id}/report
+        +GET "/api/analyses/:id/report"
     }
 
     class PageRouter {
         +GET /
         +GET /analyses
-        +GET /analyses/{id}
+        +GET "/analyses/:id"
     }
 
     class MainApp {
@@ -576,13 +576,14 @@ sequenceDiagram
 
     loop 每个 ComplianceObligation
         MT->>R: find_similar_controls(conn, embedding, 0.65, 3)
-        R->>PG: SELECT id, name, description,<br/>      1 - (embedding <=> %s::vector) AS similarity<br/>      FROM internal_controls<br/>      WHERE 1 - (embedding <=> %s::vector) >= 0.65<br/>      ORDER BY similarity DESC<br/>      LIMIT 3
+        Note over R,PG: pgvector 余弦相似度查询<br/>1-(embedding #lt;=#gt; %s) #gt;= 0.65<br/>ORDER BY similarity DESC LIMIT 3
+        R->>PG: 查询相似控制项
         PG-->>R: [{control_id, name, similarity}, ...]
 
         R-->>MT: top-3 matched controls
 
-        MT->>MT: 判断覆盖率:
-        Note over MT: >= 0.85 → "covered"<br/>>&gt;= 0.65 → "partial"<br/>< 0.65 → "missing"
+        MT->>MT: 判断覆盖率
+        Note over MT: 相似度 #gt;= 0.85 → covered<br/>相似度 #gt;= 0.65 → partial<br/>相似度 #lt; 0.65 → missing
 
         MT->>MT: 组装 MappingResult
     end
